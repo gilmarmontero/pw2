@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% block main %}
+
+
+<div class="row">
+    <div class="col-sm-6">  
+    <h1>Cadastro de Marcas de veículos</h1>   
+
+
+        <form action="{% url 'marca_novo' pk=user.id %}" method="POST">
+            {% csrf_token %}
+
+            {{ form|bootstrap }}
+
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+        </form>
+
+    </div>
+
+    <div class="col-sm-6">
+    <h1>Marcas de veículos</h1> 
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Marca do veículo</th>
+               
+                </tr>
+            </thead>
+            <tbody>
+                {% for marcas in marca %}
+                <tr>
+                <th scope="row"><a href="{% url 'marca_update' marcas.id %}">{{ marcas.id }}</th>
+                <td>{{ marcas.nome }}</td>
+                
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %} 
+

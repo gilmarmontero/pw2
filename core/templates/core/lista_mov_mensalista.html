@@ -1,0 +1,50 @@
+
+
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% block main %}
+
+
+    
+<div class="row">
+    
+    <div class="col-sm-6">
+        <h2>Cadastro movimento mensalista</h2>
+        <p>
+        <p>
+        <p>
+
+        <form action="{% url 'mov_mensalista_novo' %}" method="POST">
+                {% csrf_token %}
+
+                {{ form|bootstrap }}
+
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+        </form>
+    </div>
+
+
+
+    
+    <div class="col-sm-6">
+        <h2>lista movimento mensalista</h2>
+        <p>
+        <p>
+        <p>
+        <ul>
+            {% for mensal in mov_mensal%}
+                <li>
+                    <a href="{% url 'mov_mensalista_update' mensal.id %}">
+                         {{ mensal.mensalista }} - {{mensal.dt_pgto}} - {{mensal.total}}</a>
+                </li>
+
+
+            {% endfor%}
+        </ul>
+    </div>
+
+</div>
+   
+
+{% endblock %} 

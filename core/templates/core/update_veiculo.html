@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% block main %}
+
+    
+<div class="row">
+    <div class="col">    
+     <h2>Update Veiculo: {{ veiculo }}</h2>
+        
+        <form action="{% url 'veiculo_update' veiculo.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden"  value="{{user.id}}" name="user">
+
+            {{ form|bootstrap  }}
+
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+            
+        </form>
+
+        <br>
+        <form action="{% url 'veiculo_delete' veiculo.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden"  value="{{user.id}}" name="user">
+            
+            <button style="width: 100px" type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+    
+
+{% endblock %}   

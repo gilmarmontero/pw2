@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% block main %}
+
+    
+<div class="row">
+    <div class="col">    
+     <h2>Update marca: {{ marca }}</h2>
+        
+        <form action="{% url 'marca_update' marca.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden"  value="{{user.id}}" name="user">
+
+            {{ form|bootstrap  }}
+
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+            
+        </form>
+        
+    </div>
+</div>
+    
+
+{% endblock %}   

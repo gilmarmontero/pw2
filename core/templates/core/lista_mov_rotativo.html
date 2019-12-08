@@ -1,0 +1,69 @@
+
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% block main %}
+
+
+<div class="row">
+    <div class="col-sm-4">
+    <center><h2>Cadastro Rotativo</h2></center>
+    <p>
+    <p>
+    <p>
+     <ul>
+        <form action="{% url 'rotativo_novo' pk=user.id %}" method="POST">
+                {% csrf_token %}
+
+                {{ form|bootstrap }}
+
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+        </form>
+    </div>
+
+    <div class="col-sm-8">
+       <center> <h2>Lista Movimento Rotativo</h2></center>
+        <p>
+        <p>
+        <p>
+       <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">Veículo</th>
+                <th scope="col">Checkin</th>
+                <th scope="col">Checkout</th>
+                <th scope="col">Horas</th>
+                <th scope="col">Total R$</th>
+                <th scope="col">Pago</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rotativo in mov_rotativo %}
+                <tr>
+                <th scope="row"><a href="{% url 'rotativo_update' rotativo.id %}">{{ rotativo.veiculo }}</th>
+                <td>{{ rotativo.checkin }}</td>
+                <td>{{ rotativo.checkout}}</td>
+                <td>{{ rotativo.quant_hora}}</td>
+               
+                
+               
+                {% if  rotativo.valor_total == None  %}
+                     <td>00</td>
+                {% else %}
+                    <td>{{ rotativo.valor_total }}</td>
+                
+                {% endif %}
+
+                
+                <td>{{ rotativo.pago }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+        
+{% endblock %} 

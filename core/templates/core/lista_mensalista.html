@@ -1,0 +1,62 @@
+
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% block main %}
+
+
+<div class="row">
+    <div class="col-sm-4">
+
+        <h1>Cadastrar Mensalista</h1>
+        <form action="{% url 'mensalista_novo' pk=user.id %}" method="POST">
+                {% csrf_token %}
+
+                {{ form|bootstrap }}
+
+              
+
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+        </form>
+
+    </div>
+
+
+    <div class="col-sm-8">
+        <h1>listar Mensalistas</h1>
+        <p>
+        </p>
+       <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                
+                <th scope="col">Veículo</th>
+                <th scope="col">Proprietário</th>
+                <th scope="col">Data Inicio</th>
+                <th scope="col">Valor Mensal</th>
+                <th scope="col">Data Pgto</th>
+                <th scope="col">Pago</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mensalista in mensalistas %}
+                <tr>
+                <th scope="row"><a href="{% url 'mensalista_update' mensalista.id %}">{{ mensalista.veiculo }}</th>
+                <td>{{ mensalista.veiculo.proprietario }}</td>
+                <td>{{ mensalista.inicio }}</td>
+                <td>{{ mensalista.valor_mes }}</td>
+                <td>{{ mensalista.data_pgto }}</td>
+                <td>{{ mensalista.pago }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+
+</div>
+
+    
+
+{% endblock %} 
