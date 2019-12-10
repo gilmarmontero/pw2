@@ -50,20 +50,24 @@ def pessoa_novo(request, pk):
     lista = "/pessoa/" + str(pk)   
     return redirect(lista)
 
-def pessoa_update(request, id):
-    data = {}
-    pessoa = Pessoa.objects.get(id=id)
+def pessoa_update(request, id, pk):
+    
+    pessoa = Pessoa.objects.get(pk=id)
+    user = User.objects.get(id=pk)
+    print('teste'+ str(pessoa))
     form = PessoaForm(request.POST or None, instance=pessoa)
-    data['pessoa'] = pessoa
-    data['form'] = form
-
-    if request.method == 'POST':
+    data = {'pessoa':pessoa, 'form':form, 'user':user}
+    
+    return render(request, 'core/update_pessoa.html', data)
+   
+    '''if request.method == 'POST':
         if form.is_valid():
             form.save()
             upessoa = "/pessoa/" + request.POST['user'] 
             return redirect(upessoa)
-    else:
-        return render(request, 'core/update_pessoa.html', data)
+
+    '''
+    
 
 
 def pessoa_delete(request, id):

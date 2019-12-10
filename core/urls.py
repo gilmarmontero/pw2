@@ -12,9 +12,9 @@ urlpatterns = [
 
     path('pessoa/<int:pk>/', views.lista_pessoa, name='lista_pessoa'),
     path('pessoa_novo/<int:pk>/', views.pessoa_novo, name='pessoa_novo'),
-   # path('pessoa_update/<int:pk>/', views.pessoa_update, name='pessoa_update'),
-    re_path(r'^pessoa_update/(?P<id>\d+)/$', views.pessoa_update, name='pessoa_update'),
-    re_path(r'^pessoa_delete/(?P<id>\d+)/$', views.pessoa_delete, name='pessoa_delete'),
+    path('pessoa_update/<int:id>/<int:pk>/', views.pessoa_update, name='pessoa_update'),
+    #re_path(r'^pessoa_update/(?P<id>\d+)/$', views.pessoa_update, name='pessoa_update'),
+    re_path(r'^pessoa_delete/(?P<id>P<pk>\d+)/$', views.pessoa_delete, name='pessoa_delete'),
 
     path('veiculo/<int:pk>/', views.lista_veiculo, name='lista_veiculo'),
     path('veiculo_novo/<int:pk>/', views.veiculo_novo, name='veiculo_novo'),
