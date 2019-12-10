@@ -10,15 +10,15 @@ def login(request):
 
 def sair(request):
     logout(request)
-    return render(request, 'core/login.html')
+    return render(request, 'core/login.html', {})
 
 def login_views(request):  
-    user = request.POST.get('usuario') 
-    senha = request.POST.get('senha')
+    use = request.POST['usuario']
+    senha = request.POST['senha']
     msg = False
-    if request.method == "POST":        
-        user = authenticate(username=user, password=senha)     
-        if user is not None:   
+    if request.method == "POST":
+        user = authenticate(request, username=use, password=senha)
+        if user is not None: 
             return render(request, 'core/index.html', {'user': user}) 
         else:
             return render(request, 'core/login.html', {'msg':True}) 

@@ -52,7 +52,6 @@ class Parametro_mensal(models.Model):
 
 
 class Movimento_Rotativo(models.Model):
-    
     checkin = models.DateTimeField(auto_now=False)
     checkout = models.DateTimeField(auto_now=False, null=True, blank=True)
     valor_hora = models.ForeignKey("Parametro_hora", on_delete=models.CASCADE)
@@ -72,13 +71,16 @@ class Movimento_Rotativo(models.Model):
 
 class Mensalista(models.Model):
     veiculo = models.ForeignKey("Veiculo", on_delete=models.CASCADE)
-    inicio = models.DateField(null=True, blank=True)
+    inicio = models.DateField(null=False, blank=True)
     valor_mes = models.ForeignKey("Parametro_mensal", on_delete=models.CASCADE)
     data_pgto = models.DateField(null=True, blank=True)
     pago = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.veiculo) + ' - ' + str(self.veiculo.placa) + ' - ' + str(self.inicio)   
+
+  
+    
 
 
 
