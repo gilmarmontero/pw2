@@ -38,7 +38,7 @@
                 {% for pessoa in pessoas %}
                 <tr>
                 <th scope="row">{{ pessoa.id }}</th>
-                <td><a href="{% url 'pessoa_update' pessoa.id user.id %}">{{ pessoa.nome }}</td>
+                <td><a href="{% url 'pessoa_update' pessoa.id %}">{{ pessoa.nome }}</td>
                 <td>{{ pessoa.endereco}}</td>
                 <td>{{ pessoa.telefone }}</td>
                 </tr>
