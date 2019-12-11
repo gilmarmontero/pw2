@@ -1,0 +1,54 @@
+
+{% extends 'core/base.html' %}
+
+{% load bootstrap %}
+
+{% block main %}
+
+
+
+
+<div class="row">
+    <div class="col-sm-6">
+    <h1>Cadastro parametro</h1>
+        <form action="{% url 'parametromensal_novo' pk=user.id %}" method="POST">
+            {% csrf_token %}
+         
+            {{ form|bootstrap}}
+
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+        </form>
+    
+    </div>
+
+    
+    <div class="col-sm-6">
+        <h1>Lista parametro_mensal</h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">Id</th>
+                <th scope="col">valor_mensal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mensal in p_mensal %}
+                <tr>
+                <th scope="row">{{ mensal.id }}</th>
+                <td><a href="{% url 'parametromensal_update' mensal.id %}">{{ mensal.valor_mes }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+            
+        
+    
+    
+    </div>
+</div>
+
+   
+
+{% endblock %}

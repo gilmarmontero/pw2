@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Pessoa, Veiculo, Movimento_Rotativo, Mensalista, MovMensalista, Marca
+from .models import Pessoa, Veiculo, Movimento_Rotativo, Mensalista, Parametro_mensal, MovMensalista, Marca, Parametro_hora 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .forms import PessoaForm, VeiculoForm, Mov_RotativoForm, MensalistaForm, Mov_MensalistaForm, MarcaForm
+from .forms import PessoaForm, mensalForm, horaForm, VeiculoForm, Mov_RotativoForm, MensalistaForm, Mov_MensalistaForm, MarcaForm
 from django.contrib.auth.decorators import login_required
 
 def logar(request):
@@ -301,3 +301,92 @@ def mov_mensalista_delete(request, id):
     else:
         return render(request, 'core/delete_confirma.html', {'obj': mov_mensalista}) 
 
+
+
+
+def listaparametro_hora(request, pk):
+    horas = Parametro_hora.objects.all()
+    user = User.objects.get(pk = pk)
+    form = horaForm()
+    data = {'horas': horas, 'form': form, 'user': user}
+    return render(request, 'core/lista_parametro_hora.html', data )
+
+
+def parametrohora_novo(request, pk):
+    form = horaForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    lista = "/listaparametro_hora/" + str(pk)   
+    return redirect(lista)
+
+
+def parametrohora_update(request, id):
+    data = {}
+    parametro = Parametro_hora.objects.get(id=id)
+    form = horaForm(request.POST or None, instance=parametro)
+    data['parametro'] = parametro
+    data['form'] = form
+   
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            uparametro = "/listaparametro_hora/" + request.POST['user'] 
+            return redirect(uparametro)
+    else:
+        return render(request, 'core/update_parametrohora.html', data)  
+
+    
+def parametrohora_delete(request, id):
+    parametro = Parametro_hora.objects.get(id=id)
+    if request.method == 'POST':
+        parametro.delete()
+        uparametro = "/listaparametro_hora/" + request.POST['user'] 
+        return redirect(uparametro)
+    else:
+        return render(request, 'core/delete_confirma.html', {'obj': parametro})
+
+
+
+
+
+def listaparametro_mensal(request, pk):
+    p_mensal = Parametro_mensal.objects.all()
+    user = User.objects.get(pk = pk)
+    form = mensalForm()
+    data = {'p_mensal': p_mensal, 'form': form, 'user': user}
+    return render(request, 'core/lista_parametro_mensal.html', data )
+
+
+def parametromensal_novo(request, pk):
+    form = mensalForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    lista = "/listaparametro_mensal/" + str(pk)   
+    return redirect(lista)
+
+
+def parametromensal_update(request, id):
+    data = {}
+    mensal = Parametro_mensal.objects.get(id=id)
+    form = mensalForm(request.POST or None, instance=mensal)
+    data['mensal'] = mensal
+    data['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            umensal = "/listaparametro_mensal/" + request.POST['user'] 
+            return redirect(umensal)
+    else:
+        return render(request, 'core/update_parametromensal.html', data)
+
+
+def parametromensal_delete(request, id):
+    mensal = Parametro_mensal.objects.get(id=id)
+    if request.method == 'POST':
+        mensal.delete()
+        umensal = "/listaparametro_mensal/" + request.POST['user']
+        return redirect(umensal)
+    else:
+        return render(request, 'core/delete_confirma.html', {'obj': mensal}) 

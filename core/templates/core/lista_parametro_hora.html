@@ -1,0 +1,54 @@
+
+{% extends 'core/base.html' %}
+
+{% load bootstrap %}
+
+{% block main %}
+
+
+
+
+<div class="row">
+    <div class="col-sm-6">
+    <h1>Cadastro parametro</h1>
+        <form action="{% url 'parametrohora_novo' pk=user.id %}" method="POST">
+            {% csrf_token %}
+         
+            {{ form|bootstrap}}
+
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+        </form>
+    
+    </div>
+
+    
+    <div class="col-sm-6">
+        <h1>Lista parametro_hora</h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">Id</th>
+                <th scope="col">valor_hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hora in horas %}
+                <tr>
+                <th scope="row">{{ hora.id }}</th>
+                <td><a href="{% url 'parametrohora_update' hora.id %}">{{ hora.valor_hora }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+            
+        
+    
+    
+    </div>
+</div>
+
+   
+
+{% endblock %}

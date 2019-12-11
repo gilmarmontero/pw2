@@ -1,5 +1,5 @@
 from django.forms import ModelForm 
-from . models import Pessoa, Veiculo, Movimento_Rotativo, Mensalista, MovMensalista, Marca
+from . models import Pessoa, Veiculo, Movimento_Rotativo, Mensalista, MovMensalista, Marca, Parametro_hora, Parametro_mensal
 from django import forms
 import datetime
 
@@ -43,7 +43,17 @@ class Mov_MensalistaForm(ModelForm):
         model = MovMensalista
         fields = '__all__'
 
-      
+
+class horaForm(ModelForm):
+    class Meta:
+        model = Parametro_hora
+        fields = '__all__'
+
+
+class mensalForm(ModelForm):
+    class Meta:
+        model = Parametro_mensal
+        fields = '__all__'
         
 
 '''

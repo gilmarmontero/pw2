@@ -9,11 +9,29 @@ urlpatterns = [
     path('login_views', views.login_views, name='login_views'),
     path('sistema/<int:pk>/', views.home, name='sistema'),
     
-
     path('pessoa/<int:pk>/', views.lista_pessoa, name='lista_pessoa'),
     path('pessoa_novo/<int:pk>/', views.pessoa_novo, name='pessoa_novo'),
     re_path(r'^pessoa_update/(?P<id>\d+)/$', views.pessoa_update, name='pessoa_update'),
     re_path(r'^pessoa_delete/(?P<id>\d+)/$', views.pessoa_delete, name='pessoa_delete'),
+
+
+
+    path('listaparametro_hora/<int:pk>/', views.listaparametro_hora, name='listaparametro_hora'),
+    path('parametrohora_novo/<int:pk>/', views.parametrohora_novo, name='parametrohora_novo'),
+    re_path(r'^parametrohora_update/(?P<id>\d+)/$', views.parametrohora_update, name='parametrohora_update'),
+    re_path(r'^parametrohora_delete/(?P<id>\d+)/$', views.parametrohora_delete, name='parametrohora_delete'),
+
+
+
+    path('listaparametro_mensal/<int:pk>/', views.listaparametro_mensal, name='listaparametro_mensal'),
+    path('parametromensal_novo/<int:pk>/', views.parametromensal_novo, name='parametromensal_novo'),
+    re_path(r'^parametromensal_update/(?P<id>\d+)/$', views.parametromensal_update, name='parametromensal_update'),
+    re_path(r'^parametromensal_delete/(?P<id>\d+)/$', views.parametromensal_delete, name='parametromensal_delete'),
+
+
+
+
+
 
     path('veiculo/<int:pk>/', views.lista_veiculo, name='lista_veiculo'),
     path('veiculo_novo/<int:pk>/', views.veiculo_novo, name='veiculo_novo'),

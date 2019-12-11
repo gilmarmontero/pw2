@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% block main %}
+    
+<div class="row">
+    <div class="col">    
+        <h2>Update parametro: {{ mensal }}</h2>
+        
+        <form action="{% url 'parametromensal_update' mensal.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden"  value="{{user.id}}" name="user">
+
+            {{ form|bootstrap  }}
+
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+            
+        </form>
+
+        <br>
+        <form action="{% url 'parametromensal_delete' mensal.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden"  value="{{user.id}}" name="user">
+            
+            <button style="width: 90px" type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        
+    </div>
+</div>
+    
+
+{% endblock %}   
