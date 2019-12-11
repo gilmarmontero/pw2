@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from .forms import PessoaForm, VeiculoForm, Mov_RotativoForm, MensalistaForm, Mov_MensalistaForm, MarcaForm
 from django.contrib.auth.decorators import login_required
 
-def login(request):
+def logar(request):
     return render(request, 'core/login.html',{})
 
 def sair(request):
@@ -18,7 +18,8 @@ def login_views(request):
     msg = False
     if request.method == "POST":
         user = authenticate(request, username=use, password=senha)
-        if user is not None: 
+        if user is not None:
+            login(request, user)
             return render(request, 'core/index.html', {'user': user}) 
         else:
             return render(request, 'core/login.html', {'msg':True}) 
